@@ -7,7 +7,7 @@ public class MathFunc {
     }
 
     public static int func2(int x) {
-        int y = x * 10;
+        int y = 1 / x;
         return y;
     }
 
