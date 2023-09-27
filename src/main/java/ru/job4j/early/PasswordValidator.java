@@ -26,14 +26,20 @@ public class PasswordValidator {
             if (!Character.isLetterOrDigit(c)) {
                 hasSpecial = true;
             }
+            if (hasUpCase && hasLowCase && hasDigit && hasSpecial) {
+                break;
+            }
         }
         if (!hasUpCase) {
             throw new IllegalArgumentException("Password should contain at least one uppercase letter");
-        } else if (!hasLowCase) {
+        }
+        if (!hasLowCase) {
             throw new IllegalArgumentException("Password should contain at least one lowercase letter");
-        } else if (!hasDigit) {
+        }
+        if (!hasDigit) {
             throw new IllegalArgumentException("Password should contain at least one figure");
-        } else if (!hasSpecial) {
+        }
+        if (!hasSpecial) {
             throw new IllegalArgumentException("Password should contain at least one special symbol");
         }
         for (String s : FORBIDDEN) {
