@@ -12,7 +12,8 @@ public class AppleStore {
         this.count = count;
     }
 
-    private Customer pool() {
+    public String getLastHappyCustomer() {
+        String result = "";
         Customer customer = null;
         for (int i = 1; i <= count; i++) {
             customer = queue.poll();
@@ -20,12 +21,6 @@ public class AppleStore {
                 break;
             }
         }
-        return customer;
-    }
-
-    public String getLastHappyCustomer() {
-        String result = "";
-        Customer customer = pool();
         if (customer != null) {
             result = customer.name();
         }
@@ -34,7 +29,11 @@ public class AppleStore {
 
     public String getFirstUpsetCustomer() {
         String result = "";
-        pool();
+        for (int i = 1; i <= count; i++) {
+            if (queue.poll() == null) {
+                break;
+            }
+        }
         Customer customer = queue.peek();
         if (customer != null) {
             result = customer.name();
