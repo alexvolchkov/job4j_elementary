@@ -43,11 +43,9 @@ public class AnalyzeByMap {
         Map<String, List<Integer>> map = new HashMap<>();
         for (Pupil pupil : pupils) {
             for (Subject subject : pupil.subjects()) {
-                if (map.containsKey(subject.name())) {
-                    map.get(subject.name()).add(subject.score());
-                } else {
-                    map.put(subject.name(), new ArrayList<>(List.of(subject.score())));
-                }
+                List<Integer> list = map.getOrDefault(subject.name(), new ArrayList<>());
+                list.add(subject.score());
+                map.put(subject.name(), list);
             }
         }
         for (String name : map.keySet()) {
