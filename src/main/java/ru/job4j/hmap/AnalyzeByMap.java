@@ -44,12 +44,10 @@ public class AnalyzeByMap {
         Map<String, Integer> map = new HashMap<>();
         for (Pupil pupil : pupils) {
             for (Subject subject : pupil.subjects()) {
-                map.put(subject.name(), map.getOrDefault(subject.name(), 0) + subject.score());
+                map.merge(subject.name(), subject.score(), Integer::sum);
             }
         }
-        for (String name : map.keySet()) {
-            result.add(new Label(name, (double) map.get(name) / size));
-        }
+        map.forEach((key, value) -> result.add(new Label(key, (double) value / size)));
         return result;
     }
 
@@ -71,12 +69,10 @@ public class AnalyzeByMap {
         Map<String, Integer> map = new HashMap<>();
         for (Pupil pupil : pupils) {
             for (Subject subject : pupil.subjects()) {
-                map.put(subject.name(), map.getOrDefault(subject.name(), 0) + subject.score());
+                map.merge(subject.name(), subject.score(), Integer::sum);
             }
         }
-        for (String name : map.keySet()) {
-            result.add(new Label(name, map.get(name)));
-        }
+        map.forEach((key, value) -> result.add(new Label(key, value)));
         Collections.sort(result);
         return result.get(result.size() - 1);
     }
